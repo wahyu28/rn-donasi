@@ -1,32 +1,80 @@
-// navigation/AppNavigator.tsx
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "../app/(auth)/login";
-import BottomTabsNavigator from "../components/BottomTabsNavigator";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { NavigationContainer } from "@react-navigation/native";
+import { ActivityIndicator, Text, View } from "react-native";
+import DonationsScreen from "../app/(app)/donations/index";
+import HomeScreen from "../app/(app)/home";
+import ProfileScreen from "../app/(app)/profile";
 import { useAuth } from "../context/AuthContext";
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function AppNavigator() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <View className='flex-1 items-center justify-center bg-gray-50'>
+        <ActivityIndicator size='large' color='#3b82f6' />
+        <Text className='mt-4 text-blue-500'>Memuat...</Text>
+      </View>
+    );
+  }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        {user ? (
-          <Stack.Screen
-            name='Main'
-            component={BottomTabsNavigator}
-            options={{ headerShown: false }}
+    // <NavigationContainer>
+    <Tab.Navigator
+      initialRouteName={user ? "Home" : "Login"}
+      screenOptions={{
+        tabBarActiveTintColor: "#3b82f6",
+        tabBarInactiveTintColor: "#9ca3af",
+        tabBarStyle: {
+          backgroundColor: "#ffffff",
+          borderTopWidth: 0,
+          paddingBottom: 8,
+          paddingTop: 8,
+          height: 60,
+        },
+        headerShown: false,
+      }}
+    >
+      {user ? (
+        <>
+          <Tab.Screen
+            name='Home'
+            component={HomeScreen}
+            options={
+              {
+                /* ... */
+              }
+            }
           />
-        ) : (
-          <Stack.Screen
-            name='Login'
-            component={LoginScreen}
-            options={{ headerShown: false }}
+          <Tab.Screen
+            name='Donations'
+            component={DonationsScreen}
+            options={
+              {
+                /* ... */
+              }
+            }
           />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Tab.Screen
+            name='Profile'
+            component={ProfileScreen}
+            options={
+              {
+                /* ... */
+              }
+            }
+          />
+        </>
+      ) : (
+        <Tab.Screen
+          name='Login'
+          component={require("../app/(auth)/login").default}
+          options={{ tabBarButton: () => null }} // Sembunyikan dari tab bar
+        />
+      )}
+    </Tab.Navigator>
+    // </NavigationContainer>
   );
 }
