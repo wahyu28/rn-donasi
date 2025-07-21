@@ -1,19 +1,13 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Tabs } from "expo-router";
 import {
   CreditCardIcon,
   HomeIcon,
   UserIcon,
 } from "react-native-heroicons/outline";
-import HomeScreen from "../app/(app)/(tabs)";
-import DonationsScreen from "../app/(app)/(tabs)/donations";
-import ProfileScreen from "../app/(app)/profile";
 
-const Tab = createBottomTabNavigator();
-
-export default function BottomTabs() {
+export default function TabsLayout() {
   return (
-    <Tab.Navigator
-      initialRouteName='Home'
+    <Tabs
       screenOptions={{
         tabBarActiveTintColor: "#3b82f6",
         tabBarInactiveTintColor: "#9ca3af",
@@ -27,9 +21,8 @@ export default function BottomTabs() {
         headerShown: false,
       }}
     >
-      <Tab.Screen
-        name='Home'
-        component={HomeScreen}
+      <Tabs.Screen
+        name='index'
         options={{
           tabBarIcon: ({ color, size }) => (
             <HomeIcon color={color} size={size} />
@@ -37,9 +30,8 @@ export default function BottomTabs() {
           tabBarLabel: "Beranda",
         }}
       />
-      <Tab.Screen
-        name='Donations'
-        component={DonationsScreen}
+      <Tabs.Screen
+        name='donations'
         options={{
           tabBarIcon: ({ color, size }) => (
             <CreditCardIcon color={color} size={size} />
@@ -47,9 +39,8 @@ export default function BottomTabs() {
           tabBarLabel: "Donasi",
         }}
       />
-      <Tab.Screen
-        name='Profile'
-        component={ProfileScreen}
+      <Tabs.Screen
+        name='profile'
         options={{
           tabBarIcon: ({ color, size }) => (
             <UserIcon color={color} size={size} />
@@ -57,6 +48,6 @@ export default function BottomTabs() {
           tabBarLabel: "Profil",
         }}
       />
-    </Tab.Navigator>
+    </Tabs>
   );
 }

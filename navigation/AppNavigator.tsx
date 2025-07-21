@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 // import { NavigationContainer } from "@react-navigation/native";
 import { ActivityIndicator, Text, View } from "react-native";
-import DonationsScreen from "../app/(app)/donations/index";
-import HomeScreen from "../app/(app)/home";
+import HomeScreen from "../app/(app)/(tabs)";
+import DonationsScreen from "../app/(app)/(tabs)/donations";
 import ProfileScreen from "../app/(app)/profile";
 import { useAuth } from "../context/AuthContext";
 

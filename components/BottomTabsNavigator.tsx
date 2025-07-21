@@ -5,8 +5,8 @@ import {
   HomeIcon,
   UserIcon,
 } from "react-native-heroicons/outline";
-import DonationsScreen from "../app/(app)/donations/index";
-import HomeScreen from "../app/(app)/home";
+import HomeScreen from "../app/(app)/(tabs)";
+import DonationsScreen from "../app/(app)/(tabs)/donations";
 import ProfileScreen from "../app/(app)/profile";
 
 const Tab = createBottomTabNavigator();

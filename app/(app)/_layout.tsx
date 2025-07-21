@@ -1,18 +1,16 @@
-import { Stack } from "expo-router";
+import { Redirect, Stack } from "expo-router";
+import { useAuth } from "../../context/AuthContext";
 
 export default function AppLayout() {
+  const { user } = useAuth();
+
+  if (!user) {
+    return <Redirect href='/(auth)/login' />;
+  }
+
   return (
-    <Stack>
-      <Stack.Screen name='home' options={{ headerShown: false }} />
-      <Stack.Screen name='donations/index' options={{ title: "Donasi Saya" }} />
-      <Stack.Screen
-        name='donations/new'
-        options={{
-          title: "Donasi Baru",
-          presentation: "modal",
-        }}
-      />
-      <Stack.Screen name='profile' options={{ title: "Profil Saya" }} />
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
     </Stack>
   );
 }

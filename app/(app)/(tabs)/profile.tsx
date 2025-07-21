@@ -1,4 +1,5 @@
 // app/(app)/profile.tsx
+import { useAuth } from "@/context/AuthContext";
 import { router } from "expo-router";
 import {
   ActivityIndicator,
@@ -7,7 +8,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useAuth } from "../../context/AuthContext";
 
 export default function ProfileScreen() {
   const { user, logout, loading } = useAuth();
