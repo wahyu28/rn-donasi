@@ -1,10 +1,9 @@
 import { Tabs } from "expo-router";
 import { Platform, View } from "react-native";
 import {
-  ClockIcon,
+  ClipboardDocumentListIcon,
   CreditCardIcon,
   HomeIcon,
-  MagnifyingGlassIcon,
   UserIcon,
 } from "react-native-heroicons/outline";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -27,12 +26,9 @@ export default function TabsLayout() {
           backgroundColor: "#ffffff", // White background
           borderTopWidth: 1,
           borderTopColor: "#f3f4f6", // Light border
-          // paddingBottom: Platform.OS === "ios" ? insets.bottom + 8 : 8,
-          paddingBottom: 4,
-          paddingTop: 4,
-          // height: Platform.OS === "ios" ? 70 + insets.bottom : 80,
-          height:
-            Platform.OS === "ios" ? 70 + insets.bottom : 80 + insets.bottom,
+          paddingBottom: Platform.OS === "ios" ? insets.bottom + 4 : 8,
+          paddingTop: 2,
+          height: Platform.OS === "ios" ? 80 + insets.bottom : 80,
           elevation: 8, // Add shadow for Android
           shadowOpacity: 0.1, // Add shadow for iOS
           shadowColor: "#000000",
@@ -55,7 +51,7 @@ export default function TabsLayout() {
                 justifyContent: "center",
                 width: focused ? 56 : size,
                 height: focused ? 56 : size,
-                backgroundColor: "transparent",
+                backgroundColor: "transparent", // Light gray bg for focused
                 borderRadius: focused ? 28 : 0,
               }}
             >
@@ -83,7 +79,7 @@ export default function TabsLayout() {
                 borderRadius: focused ? 28 : 0,
               }}
             >
-              <MagnifyingGlassIcon
+              <ClipboardDocumentListIcon
                 color={focused ? "#1f2937" : "#9ca3af"}
                 size={focused ? 24 : size}
                 strokeWidth={focused ? 2.5 : 2}
@@ -94,7 +90,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name='new'
+        name='add'
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <View
@@ -105,7 +101,7 @@ export default function TabsLayout() {
                 height: 56,
                 backgroundColor: "#6366f1", // Keep purple for center button
                 borderRadius: 28,
-                marginBottom: -20,
+                marginBottom: 0,
                 // Add subtle shadow for the floating button
                 shadowColor: "#6366f1",
                 shadowOffset: { width: 0, height: 4 },
@@ -118,11 +114,10 @@ export default function TabsLayout() {
             </View>
           ),
           tabBarLabel: "",
-          href: "/donations/new",
         }}
       />
       <Tabs.Screen
-        name='search'
+        name='history'
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <View
@@ -135,7 +130,7 @@ export default function TabsLayout() {
                 borderRadius: focused ? 28 : 0,
               }}
             >
-              <ClockIcon
+              <ClipboardDocumentListIcon
                 color={focused ? "#1f2937" : "#9ca3af"}
                 size={focused ? 24 : size}
                 strokeWidth={focused ? 2.5 : 2}

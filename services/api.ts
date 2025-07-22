@@ -94,6 +94,37 @@ export const dutaService = {
     }
   },
 
+  getDonations: async (params?: {
+    page?: number;
+    limit?: number;
+    status?: string;
+    sort?: string;
+    order?: "asc" | "desc";
+  }) => {
+    try {
+      const response = await api.get("/duta/donations", {
+        params: {
+          page: params?.page || 1,
+          limit: params?.limit || 15,
+          status: params?.status,
+          sort: params?.sort || "created_at",
+          order: params?.order || "desc",
+        },
+      });
+
+      if (!response.data.success || !response.data.data) {
+        throw new Error(
+          response.data.message || "Invalid donations data structure"
+        );
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error("Donations error:", error);
+      throw new Error("Failed to fetch donations data");
+    }
+  },
+
   getRecentDonations: async () => {
     try {
       const response = await api.get("/duta/donations", {
